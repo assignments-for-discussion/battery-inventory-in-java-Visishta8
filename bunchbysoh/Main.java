@@ -34,30 +34,8 @@ public class Main {
     assert(counts.failed == 1);
     System.out.println("Done counting :)\n");
   }
-  /*
-  static void testBoundaryConditions() {
-	    System.out.println("Testing boundary conditions...\n");
 
-	    // Test batteries right at the boundary (80% SoH)
-	    int[] boundaryCapacities = {96, 100, 80};  // 80% of 120 is 96
-	    CountsBySoH boundaryCounts = countBatteriesByHealth(boundaryCapacities);
-	    assert(boundaryCounts.healthy == 1);
-	    assert(boundaryCounts.exchange == 2);
-	    assert(boundaryCounts.failed == 0);
-
-	    // Test batteries below 65% SoH
-	    int[] failedCapacities = {64, 50, 30};  // Below 65% of 120
-	    CountsBySoH failedCounts = countBatteriesByHealth(failedCapacities);
-	    assert(failedCounts.healthy == 0);
-	    assert(failedCounts.exchange == 0);
-	    assert(failedCounts.failed == 3);
-
-	    System.out.println("Boundary condition tests complete :)\n");
-	}
-
-*/
   public static void main(String[] args) {
     testBucketingByHealth();
-    //testBoundaryConditions();
   }
 }
