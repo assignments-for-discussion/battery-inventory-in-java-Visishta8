@@ -1,25 +1,33 @@
 package bunchbysoh;
 
 public class Main {
+	static final double HEALTHY_THRESHOLD = 80.0;
+	static final double EXCHANGE_THRESHOLD = 65.0;
+	static final double RATED_CAPACITY = 120.0;
+
+	
   static class CountsBySoH {
     public int healthy = 0;
     public int exchange = 0;
     public int failed = 0;
   };
 
-  static CountsBySoH countBatteriesByHealth(int[] presentCapacities) {
+  static CountsBySoH countBatteriesByHealth(int[] boundaryCapacities) {
     CountsBySoH counts = new CountsBySoH();
-    double rated_capacity = 120.0;
-    
-    for (int capacity : presentCapacities) {
-        double soh = ((double)capacity / rated_capacity) * 100; 
-        if (soh > 80) {
-            counts.healthy++;
-        } else if (soh >= 65) {
-            counts.exchange++;
-        } else {
-            counts.failed++;
-        }
+   
+    for (double capacity : boundaryCapacities) {
+    	 if (capacity <= 0) {
+    	        // Handle invalid capacity (e.g., log an error or skip)
+    	    } else {
+    	        double soh = ((double) capacity / RATED_CAPACITY) * 100;
+    	        if (soh > HEALTHY_THRESHOLD) {
+    	            counts.healthy++;
+    	        } else if (soh >= EXCHANGE_THRESHOLD) {
+    	            counts.exchange++;
+    	        } else {
+    	            counts.failed++;
+    	        }
+    	    }
     }
 
     return counts;
@@ -55,6 +63,7 @@ public class Main {
 
 	    System.out.println("Boundary condition tests complete :)\n");
 	}
+
 
   
   public static void main(String[] args) {
