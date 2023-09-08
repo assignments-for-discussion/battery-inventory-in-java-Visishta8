@@ -34,7 +34,7 @@ public class Main {
     assert(counts.failed == 1);
     System.out.println("Done counting :)\n");
   }
-  
+  /*
   static void testBoundaryConditions() {
 	    System.out.println("Testing boundary conditions...\n");
 
@@ -55,7 +55,7 @@ public class Main {
 	    System.out.println("Boundary condition tests complete :)\n");
 	}
 
-
+*/
   public static void main(String[] args) {
     testBucketingByHealth();
     //testBoundaryConditions();
