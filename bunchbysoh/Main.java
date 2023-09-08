@@ -51,6 +51,11 @@ public class Main {
 	    // Test batteries right at the boundary (80% SoH)
 	    int[] boundaryCapacities = {96, 100, 80};  // 80% of 120 is 96
 	    CountsBySoH boundaryCounts = countBatteriesByHealth(boundaryCapacities);
+	    System.out.println("Boundary Counts (80% SoH):");
+	    System.out.println("Healthy: " + boundaryCounts.healthy);
+	    System.out.println("Exchange: " + boundaryCounts.exchange);
+	    System.out.println("Failed: " + boundaryCounts.failed);
+	    
 	    assert(boundaryCounts.healthy == 1);
 	    assert(boundaryCounts.exchange == 2);
 	    assert(boundaryCounts.failed == 0);
@@ -58,6 +63,11 @@ public class Main {
 	    // Test batteries below 65% SoH
 	    int[] failedCapacities = {64, 50, 30};  // Below 65% of 120
 	    CountsBySoH failedCounts = countBatteriesByHealth(failedCapacities);
+	    System.out.println("\nBoundary Counts (Below 65% SoH):");
+	    System.out.println("Healthy: " + failedCounts.healthy);
+	    System.out.println("Exchange: " + failedCounts.exchange);
+	    System.out.println("Failed: " + failedCounts.failed);
+	    
 	    assert(failedCounts.healthy == 0);
 	    assert(failedCounts.exchange == 0);
 	    assert(failedCounts.failed == 3);
