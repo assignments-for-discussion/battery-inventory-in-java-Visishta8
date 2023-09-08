@@ -29,42 +29,35 @@ public class Main {
     System.out.println("Counting batteries by SoH...\n");
     int[] presentCapacities = {115, 118, 80, 95, 91, 77};
     CountsBySoH counts = countBatteriesByHealth(presentCapacities);
-    
-    // Test when SoH is exactly 80%
-    int[] capacities80 = {96}; // 80% of 120
-    CountsBySoH counts80 = countBatteriesByHealth(capacities80);
-    System.out.println("For Healthy Batteries: ");
-    System.out.println("Healthy Batteries: " + counts80.healthy);
-    System.out.println("Exchange Batteries: " + counts80.exchange);
-    System.out.println("Failed Batteries: " + counts80.failed);
-    /*
-    assert(counts80.healthy == 0);
-    assert(counts80.exchange == 1);
-    assert(counts80.failed == 0);*/
-
-    // Test when SoH is exactly 65%
-    int[] capacities65 = {78}; // 65% of 120
-    CountsBySoH counts65 = countBatteriesByHealth(capacities65);
-    System.out.println("For Replacable Batteries: ");
-    System.out.println("Healthy Batteries: " + counts65.healthy);
-    System.out.println("Exchange Batteries: " + counts65.exchange);
-    System.out.println("Failed Batteries: " + counts65.failed);
-
-    // Test when present capacity is equal to rated capacity
-    int[] capacitiesEqual = {120};
-    CountsBySoH countsEqual = countBatteriesByHealth(capacitiesEqual);
-    System.out.println("For Failed Batteries: ");
-    System.out.println("Healthy Batteries: " + countsEqual.healthy);
-    System.out.println("Exchange Batteries: " + countsEqual.exchange);
-    System.out.println("Failed Batteries: " + countsEqual.failed);
-    
     assert(counts.healthy == 2);
     assert(counts.exchange == 3);
     assert(counts.failed == 1);
     System.out.println("Done counting :)\n");
   }
+  
+  static void testBoundaryConditions() {
+	    System.out.println("Testing boundary conditions...\n");
+
+	    // Test batteries right at the boundary (80% SoH)
+	    int[] boundaryCapacities = {96, 100, 80};  // 80% of 120 is 96
+	    CountsBySoH boundaryCounts = countBatteriesByHealth(boundaryCapacities);
+	    assert(boundaryCounts.healthy == 1);
+	    assert(boundaryCounts.exchange == 2);
+	    assert(boundaryCounts.failed == 0);
+
+	    // Test batteries below 65% SoH
+	    int[] failedCapacities = {64, 50, 30};  // Below 65% of 120
+	    CountsBySoH failedCounts = countBatteriesByHealth(failedCapacities);
+	    assert(failedCounts.healthy == 0);
+	    assert(failedCounts.exchange == 0);
+	    assert(failedCounts.failed == 3);
+
+	    System.out.println("Boundary condition tests complete :)\n");
+	}
+
 
   public static void main(String[] args) {
     testBucketingByHealth();
+    testBoundaryConditions();
   }
 }
