@@ -17,7 +17,8 @@ public class Main {
    
     for (double capacity : boundaryCapacities) {
     	 if (capacity <= 0) {
-    	        // Handle invalid capacity (e.g., log an error or skip)
+    		 System.err.println("Invalid capacity detected: " + capacity);
+             continue;
     	    } else {
     	        double soh = ((double) capacity / RATED_CAPACITY) * 100;
     	        if (soh > HEALTHY_THRESHOLD) {
